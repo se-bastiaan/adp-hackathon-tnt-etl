@@ -1,0 +1,23 @@
+[project]
+name = "hackathon"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "adbc-driver-snowflake>=1.5.0",
+    "adbc-driver-sqlite>=1.5.0",
+    "dagster>=1.10.11",
+    "dagster-snowflake>=0.26.11",
+    "dagster-webserver>=1.10.11",
+    "httpx>=0.28.1",
+    "polars>=1.27.1",
+    "pyarrow>=18.1.0",
+    "ruff>=0.11.6",
+    "snowflake-connector-python[pandas,secure-local-storage]>=3.14.1",
+    "snowflake-sqlalchemy>=1.7.3",
+]
+
+[tool.dagster]
+module_name = "pokemon_etl.definitions"
+code_location_name = "pokemon_etl"
