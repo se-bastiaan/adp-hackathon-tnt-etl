@@ -5,6 +5,7 @@ build/
 dist/
 wheels/
 *.egg-info
+.tmp_dagster*/
 
 # Virtual environments
 venv/
