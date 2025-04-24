@@ -13,7 +13,10 @@ uv sync
 Create a virtual environment and activate it.
 ```bash
 python -m venv venv # or python3 -m venv venv depending on your system
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+source venv/bin/activate
+# or on Windows:
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
+venv\Scripts\activate
 
 which python # Check that the virtual environment is activated on macOS/Linux
 # or
