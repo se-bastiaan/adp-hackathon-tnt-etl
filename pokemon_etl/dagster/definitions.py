@@ -21,14 +21,7 @@ defs = dg.Definitions(
         ),
     ),
     asset_checks=dg.build_column_schema_change_checks(assets=code_assets),
-    jobs=[
-        pokedex_job
-    ],
-    schedules=[
-        pokedex_schedule
-    ],
-    resources={
-        "snowflake": snowflake_resource,
-        "dbt": dbt_resource
-    },
+    jobs=[pokedex_job],
+    schedules=[pokedex_schedule],
+    resources={"snowflake": snowflake_resource, "dbt": dbt_resource},
 )

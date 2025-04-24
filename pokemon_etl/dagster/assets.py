@@ -6,6 +6,7 @@ import tempfile
 from dagster_snowflake import SnowflakeResource
 from pathlib import Path
 
+
 def _read_table(snowflake: SnowflakeResource, table_name) -> pl.DataFrame:
     """
     Read a table from Snowflake into a Polars DataFrame.

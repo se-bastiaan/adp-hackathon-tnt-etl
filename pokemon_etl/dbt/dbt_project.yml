@@ -27,8 +27,5 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   pokemon_etl:
     raw:
-      +group: dbt
+      +group: dbt_raw
       +materialized: view
-    pokemon:
-      +group: dbt
-      +materialized: table

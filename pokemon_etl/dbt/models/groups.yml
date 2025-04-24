@@ -1,0 +1,6 @@
+version: 2
+
+groups:
+  - name: dbt_raw
+    owner:
+      name: team:tnt
