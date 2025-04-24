@@ -1,7 +1,12 @@
+import os
 from pathlib import Path
 from typing import Any, Mapping
 import dagster as dg
 from dagster_dbt import DbtCliResource, DbtProject, dbt_assets, DagsterDbtTranslator
+from dagster_snowflake import SnowflakeResource
+import httpx
+
+from pokemon_etl.dagster.resources.snowflake_resource import DynamicSnowflakeResource
 
 dbt_project_directory = Path(__file__).absolute().parent.parent / "dbt"
 dbt_project = DbtProject(project_dir=dbt_project_directory)
@@ -18,5 +23,6 @@ class CustomDagsterDbtTranslator(DagsterDbtTranslator):
     manifest=dbt_project.manifest_path,
     dagster_dbt_translator=CustomDagsterDbtTranslator(),
 )
-def dbt_models(context: dg.AssetExecutionContext, dbt: DbtCliResource):
-    yield from dbt.cli(["build"], context=context).stream()
+def dbt_models(context: dg.AssetExecutionContext, dbt: DbtCliResource, snowflake: DynamicSnowflakeResource):
+    os.environ["SNOWFLAKE_TOKEN"] = snowflake.get_sts_token()
+    yield from dbt.cli(["build"], context=context).stream().fetch_column_metadata().fetch_row_counts()

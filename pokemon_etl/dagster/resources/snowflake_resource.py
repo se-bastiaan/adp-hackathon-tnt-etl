@@ -2,21 +2,28 @@ import os
 from collections.abc import Mapping
 from typing import Any
 
-import requests
+import httpx
 from dagster import EnvVar
 from dagster._utils.cached_method import cached_method
 from dagster_snowflake import SnowflakeResource
 
 
 class DynamicSnowflakeResource(SnowflakeResource):
+    def get_sts_token(self) -> str:
+        """
+        Get the oauth token from the STS extension.
+        """
+        daemon_host = os.getenv("DAEMON_HOST", "localhost")
+        response = httpx.get(f"http://{daemon_host}:2774/gettoken")
+        token = response.json()["Token"]
+        return token
+
     @property
     @cached_method
     def _connection_args(self) -> Mapping[str, Any]:
         token = None
         if self.authenticator == "oauth":
-            daemon_host = os.getenv("DAEMON_HOST", "localhost")
-            response = requests.get(f"http://{daemon_host}:2774/gettoken")
-            token = response.json()["Token"]
+            token = self.get_sts_token()
 
         return {
             "account": self._resolved_config_dict.get("account"),

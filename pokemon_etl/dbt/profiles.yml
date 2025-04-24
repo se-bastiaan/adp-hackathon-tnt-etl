@@ -5,11 +5,12 @@ pokemon_etl:
       type: snowflake
       authenticator: "{{ env_var('SNOWFLAKE_AUTHENTICATOR', 'externalbrowser') }}"
       account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
-      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') if env_var('SNOWFLAKE_AUTHENTICATOR') != 'oauth' else '' }}"
       database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
       warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
       schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'TNT')}}"
       role: "{{ env_var('SNOWFLAKE_ROLE') }}"
+      token: "{{ env_var('SNOWFLAKE_TOKEN', '') }}"
 
       proxy_host: "{{ env_var('SNOWFLAKE_PROXY_HOST', '') }}"
       proxy_port: "{{ env_var('SNOWFLAKE_PROXY_PORT', '') | int }}"
