@@ -82,20 +82,6 @@ def joined_table(
     raw_battle_table: pl.DataFrame,
     raw_repro_table: pl.DataFrame,
 ) -> pl.DataFrame:
-    """
-    Returns a DataFrame that joins the Pokémon base, battle, and reproduction tables together on the "ID" column.
-
-    This function returns a single DataFrame containing all the relevant data.
-    The join is performed on the "ID" column, which is common to all three tables.
-    The resulting DataFrame contains all columns from the base, battle, and reproduction tables.
-
-    Args:
-        raw_base_table (pl.DataFrame): The Pokémon base table.
-        raw_battle_table (pl.DataFrame): The Pokémon battle table.
-        raw_repro_table (pl.DataFrame): The Pokémon reproduction table.
-    Returns:
-        pl.DataFrame: A DataFrame that joins the Pokémon base, battle, and reproduction tables together on the `ID` column.
-    """
     return raw_base_table.join(raw_battle_table, "ID").join(raw_repro_table, "ID")
 
 
