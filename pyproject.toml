@@ -16,5 +16,5 @@ dependencies = [
 ]
 
 [tool.dagster]
-module_name = "pokemon_etl.definitions"
+module_name = "pokemon_etl.dagster.definitions"
 code_location_name = "pokemon_etl"

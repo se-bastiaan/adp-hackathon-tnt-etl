@@ -222,20 +222,6 @@ def calculated_egg_hatch_time_table(filtered_table: pl.DataFrame) -> pl.DataFram
     kinds={"polars"}, owners=["team:tnt"], tags={"domain": "pokedex", "pii": "true"}
 )
 def calculated_bmi_table(filtered_table: pl.DataFrame) -> pl.DataFrame:
-    """
-    Calculate the Body Mass Index (BMI) for each Pokémon in the filtered DataFrame.
-    This function computes the BMI using the formula:
-    BMI = WEIGHT_KILOGRAMS / (HEIGHT_METERS ^ 2)
-    The result is a DataFrame with the "ID" and "BMI" columns,
-    where "BMI" is calculated based on the "WEIGHT_KILOGRAMS" and "HEIGHT_METERS" columns.
-
-    The "HEIGHT_METERS" column is cast to a float type before the calculation for accuracy.
-
-    Args:
-        filtered_table (pl.DataFrame): The filtered DataFrame containing only Generation 1 Pokémon.
-    Returns:
-        pl.DataFrame: A DataFrame with Pokémon "ID" and "BMI" columns.
-    """
     return filtered_table.with_columns(
         HEIGHT_METERS=pl.col("HEIGHT_METERS").cast(pl.Float32)
     ).select(
