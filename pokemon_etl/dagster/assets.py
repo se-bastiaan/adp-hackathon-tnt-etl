@@ -1,9 +1,10 @@
 import os
 import polars as pl
 import dagster as dg
+import tempfile
 
 from dagster_snowflake import SnowflakeResource
-
+from pathlib import Path
 
 def _read_table(snowflake: SnowflakeResource, table_name) -> pl.DataFrame:
     """
@@ -353,7 +354,8 @@ def filled_pokemon_table(
     Returns:
         Loads the aggregated DataFrame into the Snowflake table.
     """
-    file_path = "/tmp/pokemon.csv"
+    temp_dir = Path(tempfile.gettempdir())
+    file_path = temp_dir / "pokemon.csv"
     aggregated_table.write_csv(file_path)
 
     with snowflake.get_connection() as conn:
