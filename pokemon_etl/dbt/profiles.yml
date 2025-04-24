@@ -8,7 +8,7 @@ pokemon_etl:
       user: "{{ env_var('SNOWFLAKE_USER') }}"
       database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
       warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
-      schema: "{{ env_var('SNOWFLAKE_SCHEM A', 'TNT')}}"
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'TNT')}}"
       role: "{{ env_var('SNOWFLAKE_ROLE') }}"
 
       proxy_host: "{{ env_var('SNOWFLAKE_PROXY_HOST', '') }}"

@@ -1,6 +1,8 @@
 import dagster as dg
 from pathlib import Path
 
+from dagster_polars import PolarsParquetIOManager
+
 from pokemon_etl.dagster import assets
 from pokemon_etl.dagster.resources.snowflake_resource import snowflake_resource
 from pokemon_etl.dagster.jobs import pokedex_job
@@ -23,5 +25,9 @@ defs = dg.Definitions(
     asset_checks=dg.build_column_schema_change_checks(assets=code_assets),
     jobs=[pokedex_job],
     schedules=[pokedex_schedule],
-    resources={"snowflake": snowflake_resource, "dbt": dbt_resource},
+    resources={
+        "snowflake": snowflake_resource,
+        "dbt": dbt_resource,
+        "io_manager": PolarsParquetIOManager(),
+    },
 )

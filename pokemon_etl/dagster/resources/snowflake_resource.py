@@ -20,7 +20,7 @@ class DynamicSnowflakeResource(SnowflakeResource):
 
         return {
             "account": self._resolved_config_dict.get("account"),
-            "user": self._resolved_config_dict.get("user"),
+            "user": self._resolved_config_dict.get("user") if not token else None,
             "database": self._resolved_config_dict.get("database"),
             "schema": self._resolved_config_dict.get("schema"),
             "warehouse": self._resolved_config_dict.get("warehouse"),

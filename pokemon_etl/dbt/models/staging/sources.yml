@@ -8,18 +8,15 @@ sources:
       - name: RAW_POKEMON_BASE
         meta:
           dagster:
-            kinds: ['snowflake']
-        group: source
+            group: dbt
         description: "This table contains information about Pokémon, including their names and generations."
       - name: RAW_POKEMON_BATTLE
         meta:
           dagster:
-            kinds: ['snowflake']
-        group: source
+            group: dbt
         description: "This table contains information about Pokemon battle stats."
       - name: RAW_POKEMON_REPRODUCTION
         meta:
           dagster:
-            kinds: ['snowflake']
-        group: source
+            group: dbt
         description: "This table contains information about Pokemon reproduction, including encounter rate and egg stats."

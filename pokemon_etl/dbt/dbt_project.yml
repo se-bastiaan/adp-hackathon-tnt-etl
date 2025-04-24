@@ -35,3 +35,7 @@ models:
     mart:
       +group: dbt
       +materialized: table
+
+sources:
+  pokemon_etl:
+    +group: dbt
