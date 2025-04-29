@@ -410,7 +410,7 @@ def filled_pokemon_table(
     """
     temp_dir = Path(tempfile.gettempdir())
     file_path = temp_dir / "pokemon.csv"
-    aggregated_table.write_csv(file_path)
+    aggregated_table.collect().write_csv(file_path)
 
     with snowflake.get_connection() as conn:
         conn.cursor().execute(f"PUT file://{file_path} @%PY_POKEMON_PROCESSED;")

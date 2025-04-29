@@ -24,5 +24,6 @@ class CustomDagsterDbtTranslator(DagsterDbtTranslator):
     dagster_dbt_translator=CustomDagsterDbtTranslator(),
 )
 def dbt_models(context: dg.AssetExecutionContext, dbt: DbtCliResource, snowflake: DynamicSnowflakeResource):
-    os.environ["SNOWFLAKE_TOKEN"] = snowflake.get_sts_token()
+    if snowflake.authenticator == "oauth":
+        os.environ["SNOWFLAKE_TOKEN"] = snowflake.get_sts_token()
     yield from dbt.cli(["build"], context=context).stream().fetch_column_metadata().fetch_row_counts()
